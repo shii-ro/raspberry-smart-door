@@ -39,17 +39,7 @@ def getEstadoPorta():
     state = file.read().strip()
     file.close()
     return state
-    
-def controle_porta(estado):
-    if estado == 0:
-        GPIO.output(PORTA_FECHADA, GPIO.LOW)
-        GPIO.output(PORTA_ABERTA, GPIO.HIGH)
-    elif estado == 1:
-        GPIO.output(PORTA_FECHADA, GPIO.HIGH)
-        GPIO.output(PORTA_ABERTA, GPIO.LOW)
-    #GPIO.cleanup()
-    return
-   
+
 def abrir_Porta():
     GPIO.output(PORTA_ABERTA, GPIO.HIGH)
     GPIO.output(PORTA_FECHADA, GPIO.LOW)
