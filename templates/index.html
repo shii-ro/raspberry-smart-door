@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    </head>
+    <body>
+        <div class="jumbotron">
+          <div class="container">
+            <h1>Controle da GPIO</h1>
+            <p>Bem vindo!</p>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <h3>Porta  :  {{ porta  }} <span id='cpu' class="label"></span></h3>
+              <br>
+              <h2> Biometria </h2>
+              
+              <h3>Ultimo acesso por : {{ nome }} ás {{ data }}</h3>
+            </div>
+            <div class="col-md-4">
+              <h3>Controle Porta</h3>
+              {% if porta == "Fechada" %}
+              <button class="btn btn-default" id='porta_abrir' type='button'>Abrir Porta</button>
+              {% else %}
+              <button class="btn btn-default"  id='porta_fechar' type='button'>Fechar Porta</button>
+              {% endif %}
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.12.0.min.js"><\/script>')</script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script>
+          $(document).ready(function() {
+            $('#porta_abrir').click(function() {
+              $.post('/porta/1');
+              window.location.reload();
+            });
+            $('#porta_fechar').click(function() {
+              $.post('/porta/0');
+              window.location.reload();
+            });
+          });
+        </script>
+    </body>
+</html>
